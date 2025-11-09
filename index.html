@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PANGU · Sistema Completo de Produtividade</title>
     <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
         :root {
             --bg-primary: #0f0f23;
             --bg-secondary: #1a1a2e;
@@ -29,6 +33,184 @@
             --radius-sm: 20px;
         }
 
+/* === ESTILOS DA TELA DE INTRODUÇÃO === */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 1s ease-out;
+}
+
+#splash-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.splash-logo {
+    height: 120px;
+    width: auto;
+    margin-bottom: 40px;
+    filter: brightness(0) invert(1);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 900px) {
+    .splash-content {
+        max-width: 95%;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .splash-content {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .features-grid {
+        max-height: 350px;
+        padding: 20px;
+    }
+    
+    .splash-logo {
+        height: 100px;
+    }
+    
+    .splash-title {
+        font-size: 1.8rem;
+    }
+}
+.splash-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, var(--brand), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 40px;
+    max-height: 1000px;
+    overflow-y: auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+}
+
+.feature-section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--brand);
+    margin-bottom: 12px;
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.hobbies-list, .agenda-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hobby-item-splash, .agenda-item-splash {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--brand);
+    transition: all 0.3s ease;
+}
+
+.hobby-item-splash:hover, .agenda-item-splash:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.hobby-icon, .agenda-icon {
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+}
+
+.hobby-info, .agenda-info {
+    flex: 1;
+}
+
+.hobby-name, .agenda-task {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.hobby-stats, .agenda-time {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 20px;
+    font-size: 14px;
+}
+
+.skip-btn {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(167, 139, 250, 0.15));
+    border: 1px solid var(--brand);
+    color: white;
+    padding: 16px 40px;
+    border-radius: var(--radius-xl);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 25px;
+    display: block;
+    margin: 0 auto 25px auto;
+    width: fit-content; /* largura conforme o conteúdo */
+}
+
+.skip-btn:hover {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.5), rgba(167, 139, 250, 0.3));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--brand-glow);
+}
+
+.countdown {
+    color: var(--text-secondary);
+    font-size: 14px;
+    opacity: 0.8;
+}
+
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +218,7 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Funnel Display', sans-serif;
             background: 
                 radial-gradient(ellipse at 10% 10%, var(--bg-secondary) 0%, transparent 50%),
                 radial-gradient(ellipse at 90% 90%, var(--bg-tertiary) 0%, transparent 50%),
@@ -78,7 +260,7 @@
         .page-subtitle {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -152,11 +334,16 @@
         .timer-display {
             font-weight: 700;
             text-align: center;
-            font-size: 72px;
+            font-size: 100px;
             letter-spacing: 3px;
             margin: 10px 0 20px;
             font-variant-numeric: tabular-nums;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            font-family: 'Poiret One', cursive;
+            font-family: 'Alumni Sans Pinstripe', sans-serif;
+            font-weight: 300;
+
+
         }
 
         .timer-display-danger {
@@ -359,6 +546,16 @@
             transform: rotate(5deg);
             cursor: grabbing;
         }
+
+.task-item.drag-over {
+    border: 2px dashed var(--brand);
+    background: rgba(167, 139, 250, 0.1);
+}
+
+.task-item.dragging {
+    opacity: 0.5;
+    transform: rotate(2deg);
+}
 
         .task-header {
             display: flex;
@@ -1088,6 +1285,16 @@
             transition: width 0.3s;
         }
 
+        /* Estilo para o botão de editar tarefa */
+        .task-btn-edit {
+            background: rgba(96, 165, 250, 0.2) !important;
+            color: var(--accent) !important;
+        }
+
+        .task-btn-edit:hover {
+            background: rgba(96, 165, 250, 0.3) !important;
+        }
+
         /* Toast Notifications */
         .toast-container {
             position: fixed;
@@ -1219,11 +1426,102 @@
             .notes-actions {
                 justify-content: space-between;
             }
+            .transfer-btn {
+                background: rgba(96, 165, 250, 0.2) !important;
+                color: var(--accent) !important;
+                border: none;
+                border-radius: var(--radius-sm);
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                font-size: 12px;
+                font-weight: bold;
+                transition: all 0.3s;
+                margin-left: 4px;
+            }
+
+            }
+            .transfer-btn:hover {
+                background: rgba(96, 165, 250, 0.4) !important;
+                transform: scale(1.1);
+            }
+.note-btn-edit {
+    background: rgba(96, 165, 250, 0.2) !important;
+    color: var(--accent) !important;
+}
+
+.note-btn-edit:hover {
+    background: rgba(96, 165, 250, 0.3) !important;
+}
+
         }
     </style>
 </head>
 <body>
+    <body>
+    <!-- TELA DE INTRODUÇÃO -->
+    <div id="splash-screen">
+        <svg class="splash-logo" viewBox="0 0 793.15 264.59">
+            <!-- COLE AQUI O MESMO SVG DO .brand-logo -->
+            <defs>
+                <style>.cls-1{fill:#feefe3;}</style>
+            </defs>
+            <g>
+                <g>
+                    <path class="cls-1" d="M390.45,77.45v68.08h-59.29l-.07,41.61h-29.89l.07-109.69h89.18ZM360.59,103.76h-29.4l-.07,15.46h29.4l.07-15.46Z"/>
+                    <path class="cls-1" d="M490.73,77.45l.1,109.69h-30.05l.07-41.61h-29.4l-.07,41.61h-29.89l.07-109.69h89.18ZM460.88,103.76h-29.4l-.07,15.46h29.4l.07-15.46Z"/>
+                    <path class="cls-1" d="M591.5,77.45l.1,109.69h-30.05l.1-83.37h-29.4l-.1,83.37h-29.89l.07-109.69h89.18Z"/>
+                    <path class="cls-1" d="M692.28,77.45l.03,26.31h-59.29l.03,57.06h29.4l-.06-15.29h-15.84l.13-26.31h45.73l-.03,67.92h-89.34l.07-109.69h89.18Z"/>
+                    <path class="cls-1" d="M793.05,77.45l.1,109.69h-89.34l.07-109.69h29.89l.06,83.37h29.4l-.06-83.37h29.89Z"/>
+                </g>
+                <g>
+                    <path class="cls-1" d="M224.63,185.43c-1.96-5.31-5.15-10.52-8.47-15.11-2.78-3.84-6.87-8.88-10.46-11.92-.31-.26-2.19-1.81-2.41-1.54l-1.04,5.16-.95-2.66-.77-.44c-2.09,13.7-8.65,26.43-17.21,37.17,13.01-5.81,26.55-12.63,41.3-10.67Z"/>
+                    <path class="cls-1" d="M183.31,67.87c1.26-13.5.71-31.09-12.49-38.76-15.96-9.28-25.17,9.72-41.27,6.85-12.38-2.21-19.99-14.75-33.76-7.07-8.11,4.53-12.33,14.17-12.97,23.17-1.23,17.28.92,35.94-.02,53.36.79,6.34,2.87,12.63,6.62,17.82,1.22,1.69,2.81,2.99,3.73,4.71l3.38-6.43c-.62-1.22-1.75-2.1-2.32-3.42-1.66-3.84-.83-10.47,3.53-12.09l.94.49c.91,1.44-.36,4.35-.28,6.05.02.48.67,4.04,1.63,3.36,2.82-5.2,7.62-10.19,13.43-11.87l.34-.34c-4.74-5.71.41-14.19,6.85-15.7.21-5.25,2.32-13.89-5.47-13.56,2.21,2.65.83,6.5-2.22,7.76-5.96,2.45-11.01-4.35-6.73-9.3-4.69-.6-11.19-3.21-12.39-8.26,3.82.77,7.31,2.64,11.07,3.55,6.46,1.56,16.93.48,20.31,7.23,1.23,2.46,1.4,11.98.95,14.84-.37,2.37-4.26,2.69-5.95,3.69-3.58,2.1-3.24,7.56,1.65,6.82.73-.11,1.27-.72,2.06-.67.78.05,2.28,1.02,3.22,1.28,3.55.97,7.15,1.12,10.76.28,1.2-.28,3.43-1.49,4.31-1.55.84-.05,1.6.57,2.42.66,4.46.5,4.99-3.94,1.87-6.36-1.69-1.31-5.93-1.79-6.47-4.2-.41-1.82-.26-9.16-.03-11.24,1.16-10.75,13.85-8.87,21.58-10.77,3.72-.92,7.27-2.83,11.07-3.55-1.86,4.91-7.73,7.83-12.73,8.26.04,1,1.07,1.28,1.3,2.31.63,2.81-.35,5.9-3.13,7.05-5.14,2.14-10.03-2.9-7.47-7.99-7.84.45-4.5,8.42-5.12,13.73,6.41,1.55,11.79,10.23,6.84,15.87,6.34,1.7,10.5,7.08,14.28,12.04,2.62-2.27.02-7.18,1.03-9.28,1.46-3.02,4.44,2.99,4.82,4.47.9,3.52.13,7.9-2.92,10l3.26,6.86c6.16-6.37,10.22-14.24,10.84-23.23.82-11.9-1.17-24.81-.36-36.84ZM121.97,66.6c-5.47-.87-9.41-7.23-14.62-9.13-1.65-.6-4.43-1.04-6.17-1.09-1.71-.04-3.37.74-5.3.16-1.06-.32-8.58-6.96-8.25-7.41,6.12-1.01,13.54-1.27,19.62.16,5.36,1.26,14.34,7.75,18.25,11.7,3.23,3.26.82,6.3-3.54,5.6ZM170.61,56.55c-2.03.6-3.83-.23-5.69-.22-1.37,0-3.96.5-5.32.91-5.6,1.66-12.17,11.17-18.28,9.29-1.65-.51-2.38-2.53-1.62-4.07.74-1.49,9.31-8.22,11.17-9.48,8.13-5.5,18.63-5.18,27.99-3.85.33.45-7.31,7.13-8.24,7.41Z"/>
+                    <path class="cls-1" d="M134.98,113.14c-14.87-.98-22.99,11.76-29.79,22.9,5.41,3.22,12.45,3.79,17.87.32,2.78-1.78,4.5-4.87,7.87-5.9,5.95-1.82,8.03,3.27,12.15,5.9,5.85,3.74,12.22,2.62,18.21-.15-5.67-9.83-13.79-22.25-26.32-23.07ZM145.13,124.69c-1.49,1.11-3.12.18-4.64.15-4.8-.1-9.68-.08-14.49,0-1.65.03-3.31.9-4.89-.07-1.23-2.25.71-3.97,2.56-5.01,4.59-2.59,13.15-2.64,17.9-.48,1.99.91,4.94,2.93,3.56,5.41Z"/>
+                    <path class="cls-1" d="M192.31,85.13c2.99-5.81,5.36-16.9.19-22.1-.22-.23-1.73-1.39-1.94-1.15-.04,7.95-.25,15.89,1.03,23.75.9.16.53-.13.72-.49Z"/>
+                    <path class="cls-1" d="M74.39,62.56c-6,4.44-3.59,17.5,0,23.05,1.62-7.78,1.6-15.82,1.55-23.74-.64-.09-1.08.35-1.54.69Z"/>
+                    <path class="cls-1" d="M132.3,0C59.35,0,0,59.35,0,132.3s59.35,132.3,132.3,132.3,132.3-59.35,132.3-132.3S205.24,0,132.3,0ZM218.93,217.74c-8-7.34-18.43-12.88-28.99-14.65-6.77-1.14-15.75-.92-22.57-.06-1.25.16-10.14,2-10.19,2.88l24.72,37.56c-.59.26-1.18.52-1.78.78-.58-.4-1.05-.73-1.25-.83-15.53-8.14-21.62.08-35.63,3.98-21.03,5.85-31.83-8.72-50.94-7.92-4.15.17-8.73,1.16-12.66,2.49l-.09.04c-1.48-.71-2.93-1.46-4.38-2.23.09-.12.18-.23.25-.31,8.39-9.05,21.75-20.55,33.1-25.42,1.57-.67,7.18-2.8,8.56-2.80h38.72c-10.84-19.38-31.3-27.54-52.94-22.83-20.06,4.37-39.42,17.95-54.42,32.05-23.32-22.19-37.88-53.51-37.88-88.17,0-67.13,54.62-121.75,121.75-121.75,21.75,0,42.18,5.74,59.86,15.77,2.18,3.57,4.02,7.32,5.18,11.38,2.81,9.82,1.88,20.39,3.24,30.49,1.79,13.24,7.43,24.38,15.31,34.95,1.05,1.41,5.23,5.85,5.64,6.75.07.15.09.56-.17.51-3.51-2.07-7.4-3.75-11.2-5.32-3.93-1.62-10-4.34-13.94-5.34-.19-.05-.56-.1-.51.16l3.41,9.24c18.11,6.55,34.55,17.14,47.36,31.55l6.37,8.5c-.53,3.77-1.22,7.49-2.09,11.15-10.97-18.73-28.71-32.98-48.86-40.99l2.07,8.08c18.59,10.12,34.35,26.43,42.94,45.88-1.3,3.62-2.76,7.15-4.39,10.61-6.85-18.95-20.04-35.5-37.01-46.33-.91-.38-.16,1.37-.15,1.87.08,2.63-.41,5.2-.19,7.76,15.05,11.85,26.72,28.85,31.58,47.51-.33.55-.67,1.11-1.01,1.65-9.32-4.1-19.4-3.57-29.17-.94-1.47.4-3.9,1.06-5.22,1.66-.41.18-.62-.16-.49.72,9.03,2.35,17.65,6.5,25.24,11.97-2.28,2.75-4.68,5.4-7.19,7.94Z"/>
+                </g>
+            </g>
+        </svg>
+
+        <div class="splash-content">
+            <h1 class="splash-title"></h1>
+            
+            <div class="features-grid">
+                <!-- Hobbies Negligenciados -->
+                <div class="feature-section">
+                    <div class="section-title">🎯 Hobbies para Retomar</div>
+                    <div id="neglected-hobbies" class="hobbies-list">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+
+                <!-- Compromissos de Hoje -->
+                <div class="feature-section">
+                    <div class="section-title">📅 Compromissos de Hoje</div>
+                    <div id="today-agenda" class="agenda-list">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <button id="skip-splash" class="skip-btn">
+                Obrigado! Entrar no PANGU
+            </button>
+            
+            <div class="countdown">
+                <span id="countdown-text">Entrando automaticamente em </span>
+                <span id="countdown-timer">15</span>
+                <span> segundos</span>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
+
         <!-- Cabeçalho da Página -->
         <header class="page-header">
             <svg class="brand-logo" viewBox="0 0 793.15 264.59">
@@ -1766,6 +2064,19 @@
                                     </div>
                                 </div>
                             </details>
+
+                            <!-- 🤓 Pessoal e trampos -->
+                            <details>
+                                <summary><span class="caret"></span> 🤓 Pessoal e trampos</summary>
+                                <div class="panel">
+                                    <div class="hobbies-selection-grid">
+                                        <div class="hobby-item" data-value="César Seguros">César Seguros (meta = arte)</div>
+                                        <div class="hobby-item" data-value="Dona Maria">Dona Maria (meta = arte)</div>
+                                        <div class="hobby-item" data-value="Preencher aplicativo da Growth">Preencher aplicativo da Growth</div>
+
+                                    </div>
+                                </div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -1925,7 +2236,7 @@
                         this.state.tickTacActive = true;
                         this.soundManager.startTickTac();
                         tickTacIndicator.classList.add('active');
-                        this.showToast("Tic-tac ativado - últimos 10 segundos");
+                        
                     }
                 } else {
                     if (this.state.tickTacActive) {
@@ -1980,7 +2291,6 @@
 
             startTask(index = 0) {
                 if (index >= this.state.tasks.length) {
-                    this.showToast("Nenhuma tarefa na fila");
                     return;
                 }
                 
@@ -2013,12 +2323,10 @@
                 if (this.state.remainingMs <= 0) {
                     this.soundManager.stopTickTac();
                     this.soundManager.playAlarmSound();
-                    this.showToast("Tarefa concluída!");
                     
                     if (this.state.breakEnabled && !this.state.inBreak) {
                         this.state.inBreak = true;
                         this.state.remainingMs = 7 * 60000;
-                        this.showToast("Iniciando intervalo de 7 minutos automaticamente");
                         this.startTimer();
                     } else {
                         this.nextTask();
@@ -2037,12 +2345,10 @@
                 document.getElementById('tickTacIndicator').classList.remove('active');
                 
                 if (this.state.current < this.state.tasks.length) {
-                    this.showToast(`Iniciando próxima tarefa automaticamente: ${this.state.tasks[this.state.current].name}`);
                     this.startTask(this.state.current);
                 } else {
                     this.state.running = false;
                     this.state.current = -1;
-                    this.showToast("Todas as tarefas concluídas!");
                     this.renderTasks();
                     this.updateTimerDisplay();
                     this.collapseTaskDetails();
@@ -2156,6 +2462,7 @@
                             </div>
                             <div class="task-actions">
                                 <button class="task-btn" onclick="timerSystem.startTaskFromList(${index})">iniciar</button>
+                                <button class="task-btn task-btn-edit" onclick="timerSystem.editTask(${index})">editar</button>
                                 <button class="task-btn task-btn-delete" onclick="timerSystem.deleteTask(${index})">apagar</button>
                             </div>
                         </div>
@@ -2183,7 +2490,6 @@
                 const steps = document.getElementById('taskSteps').value.trim();
                 
                 if (!name) {
-                    this.showToast("Nome da tarefa é obrigatório");
                     return;
                 }
                 
@@ -2202,7 +2508,6 @@
                 
                 this.saveState();
                 this.renderTasks();
-                this.showToast("Tarefa adicionada");
             }
 
             deleteTask(index) {
@@ -2215,11 +2520,41 @@
                 this.renderTasks();
                 this.updateTimerDisplay();
                 this.saveState();
-                this.showToast("Tarefa removida");
             }
 
             startTaskFromList(index) {
                 this.startTask(index);
+            }
+
+            editTask(index) {
+                const task = this.state.tasks[index];
+                
+                // Preenche o formulário com os dados da tarefa
+                document.getElementById('taskName').value = task.name;
+                document.getElementById('taskDuration').value = task.duration;
+                document.getElementById('taskGoal').value = task.goal || '';
+                document.getElementById('taskSteps').value = task.steps || '';
+                
+                // Remove a tarefa da lista (será readicionada com os dados atualizados)
+                this.state.tasks.splice(index, 1);
+                
+                // Ajusta o índice atual se necessário
+                if (this.state.current === index) {
+                    this.resetTimerState();
+                } else if (this.state.current > index) {
+                    this.state.current--;
+                }
+                
+                // Foca no campo de nome para facilitar a edição
+                document.getElementById('taskName').focus();
+                
+                // Rola para o formulário
+                document.querySelector('#timer-section .card').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+                
+                this.renderTasks();
+                this.saveState();
             }
 
             clearAllTasks() {
@@ -2229,7 +2564,6 @@
                     this.saveState();
                     this.renderTasks();
                     this.updateTimerDisplay();
-                    this.showToast("Todas as tarefas removidas");
                 }
             }
 
@@ -2282,7 +2616,6 @@
                     this.state.breakEnabled = !this.state.breakEnabled;
                     document.getElementById('breakState').textContent = this.state.breakEnabled ? "on" : "off";
                     this.saveState();
-                    this.showToast(`Intervalos ${this.state.breakEnabled ? 'ativados' : 'desativados'}`);
                 });
 
                 document.getElementById('btnSound').addEventListener('click', () => {
@@ -2294,7 +2627,6 @@
                     }
                     document.getElementById('soundState').textContent = this.state.sounds ? "ativados" : "mutados";
                     this.saveState();
-                    this.showToast(`Sons ${this.state.sounds ? 'ativados' : 'desativados'}`);
                 });
 
                 document.getElementById('addTask').addEventListener('click', () => this.addTask());
@@ -2304,7 +2636,6 @@
                     if (this.state.tasks.length > 0) {
                         this.startTask(0);
                     } else {
-                        this.showToast("Adicione tarefas primeiro");
                     }
                 });
             }
@@ -2362,7 +2693,6 @@
                 this.state.friday = document.getElementById('friday').value;
                 
                 localStorage.setItem(this.STORE_KEY, JSON.stringify(this.state));
-                this.showToast("Agenda salva com sucesso!");
             }
 
             setupEventListeners() {
@@ -2461,7 +2791,6 @@
                 const content = document.getElementById('noteContent').value.trim();
 
                 if (!title && !content) {
-                    this.showToast('Digite um título ou conteúdo para a nota');
                     return;
                 }
 
@@ -2478,7 +2807,6 @@
                 this.clearForm();
                 this.renderNotes();
                 this.updateNotesCount();
-                this.showToast('Nota salva com sucesso!');
                 
                 this.toggleNoteCard();
             }
@@ -2488,8 +2816,42 @@
                 this.saveNotes();
                 this.renderNotes();
                 this.updateNotesCount();
-                this.showToast('Nota excluída');
             }
+
+editNote(id) {
+    const note = this.notes.find(note => note.id === id);
+    if (!note) return;
+
+    // Preenche o formulário com os dados da nota
+    document.getElementById('noteTitle').value = note.title;
+    document.getElementById('noteContent').value = note.content;
+    
+    // Remove a nota da lista (será readicionada com os dados atualizados)
+    this.notes = this.notes.filter(note => note.id !== id);
+    
+    // Salva as alterações
+    this.saveNotes();
+    
+    // Mostra o card de nova nota se estiver escondido
+    const noteCard = document.getElementById('newNoteCard');
+    if (noteCard.classList.contains('hidden')) {
+        this.toggleNoteCard();
+    }
+    
+    // Foca no título para facilitar a edição
+    document.getElementById('noteTitle').focus();
+    
+    // Rola para o formulário
+    document.querySelector('#notes-section .card').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+    
+    // Atualiza a lista
+    this.renderNotes();
+    this.updateNotesCount();
+    
+    this.showToast('Nota pronta para edição');
+}
 
             clearForm() {
                 document.getElementById('noteTitle').value = '';
@@ -2516,22 +2878,25 @@
 
                 emptyState.style.display = 'none';
 
-                const html = filteredNotes.map(note => `
-                    <div class="note-item">
-                        <div class="note-header">
-                            <div class="note-title">${this.escapeHtml(note.title)}</div>
-                            <div class="note-date">${note.date}</div>
-                        </div>
-                        <div class="note-content">
-                            ${this.escapeHtml(note.content) || '<em style="color: var(--text-secondary);">Sem conteúdo</em>'}
-                        </div>
-                        <div class="note-actions">
-                            <button class="note-btn note-btn-delete" onclick="notesSystem.deleteNote(${note.id})">
-                                Excluir
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
+const html = filteredNotes.map(note => `
+    <div class="note-item">
+        <div class="note-header">
+            <div class="note-title">${this.escapeHtml(note.title)}</div>
+            <div class="note-date">${note.date}</div>
+        </div>
+        <div class="note-content">
+            ${this.escapeHtml(note.content) || '<em style="color: var(--text-secondary);">Sem conteúdo</em>'}
+        </div>
+        <div class="note-actions">
+            <button class="note-btn note-btn-edit" onclick="notesSystem.editNote(${note.id})">
+                Editar
+            </button>
+            <button class="note-btn note-btn-delete" onclick="notesSystem.deleteNote(${note.id})">
+                Excluir
+            </button>
+        </div>
+    </div>
+`).join('');
 
                 container.innerHTML = html;
             }
@@ -2623,7 +2988,7 @@
                 localStorage.setItem('weeklyProgress', JSON.stringify(this.weeklyProgress));
             }
 
-            renderActivities() {
+                        renderActivities() {
                 const activitiesList = document.getElementById('activitiesList');
                 const emptyState = document.getElementById('emptyStateHobbies');
                 const progressChart = document.getElementById('progressChart');
@@ -2649,6 +3014,7 @@
                             <div class="activity-header">
                                 <div class="activity-name">${name}</div>
                                 <div class="activity-controls">
+                                    <button class="transfer-btn" data-name="${name}" title="Adicionar ao timer">↥</button>
                                     <button class="check-btn" data-name="${name}">✓</button>
                                     <button class="uncheck" data-name="${name}">↶</button>
                                     <button class="delete" data-name="${name}">×</button>
@@ -2675,6 +3041,13 @@
                 
                 activitiesList.innerHTML = html;
 
+                document.querySelectorAll('.transfer-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const name = e.target.dataset.name;
+                        this.transferToTimer(name);
+                    });
+                });
+
                 document.querySelectorAll('.goal-input').forEach(input => {
                     input.addEventListener('change', (e) => {
                         const name = e.target.dataset.name;
@@ -2682,9 +3055,27 @@
                         this.activityGoals[name] = value;
                         this.saveActivities();
                         this.renderActivities();
-                        this.showToast(`Meta atualizada para ${name}`, 'success');
                     });
                 });
+            }
+
+            transferToTimer(activityName) {
+                // Verifica se o sistema de timer está disponível
+                if (typeof timerSystem !== 'undefined') {
+                    // Preenche o formulário de tarefas com o nome da atividade
+                    document.getElementById('taskName').value = activityName;
+                    document.getElementById('taskDuration').value = 25; // Define uma duração padrão de 25min
+                    
+                    // Foca no campo de nome para facilitar a edição
+                    document.getElementById('taskName').focus();
+                    
+                    // Rola a página para a seção do timer
+                    document.getElementById('timer-section').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                    
+                } else {
+                }
             }
 
             updateHobbyItems() {
@@ -2706,9 +3097,7 @@
                     this.renderActivities();
                     this.updateHobbyItems();
                     this.updateProgressChart();
-                    this.showToast(`${name} adicionado(a)!`, 'success');
                 } else {
-                    this.showToast(`${name} já está na sua lista!`, 'error');
                 }
             }
 
@@ -2815,7 +3204,6 @@
                         this.saveActivities();
                         this.renderActivities();
                         this.updateProgressChart();
-                        this.showToast(`+1 para ${name}!`, 'success');
                     }
                     
                     if (e.target.classList.contains('uncheck')) {
@@ -2831,9 +3219,7 @@
                             this.saveActivities();
                             this.renderActivities();
                             this.updateProgressChart();
-                            this.showToast(`-1 para ${name}`, 'warning');
                         } else {
-                            this.showToast(`${name} já está em zero`, 'error');
                         }
                     }
                     
@@ -2844,7 +3230,6 @@
                         this.renderActivities();
                         this.updateHobbyItems();
                         this.updateProgressChart();
-                        this.showToast(`${name} removido(a)`, 'success');
                     }
                 });
 
@@ -2969,20 +3354,288 @@
             }
         }
 
-        // ===== INICIALIZAÇÃO DOS SISTEMAS =====
-        const timerSystem = new TimerSystem();
-        const agendaSystem = new AgendaSystem();
-        const notesSystem = new NotesSystem();
-        const hobbiesSystem = new HobbiesSystem();
+// ===== SISTEMA DE TELA DE INTRODUÇÃO =====
+class SplashScreen {
+    constructor() {
+        this.splashElement = document.getElementById('splash-screen');
+        this.containerElement = document.querySelector('.container');
+        this.countdownElement = document.getElementById('countdown-timer');
+        this.countdownText = document.getElementById('countdown-text');
+        this.skipButton = document.getElementById('skip-splash');
+        this.neglectedHobbiesElement = document.getElementById('neglected-hobbies');
+        this.todayAgendaElement = document.getElementById('today-agenda');
+        this.countdownTime = 15;
+        this.countdownInterval = null;
+        this.init();
+    }
 
-        // Expor sistemas globalmente para os event handlers HTML
-        window.timerSystem = timerSystem;
-        window.notesSystem = notesSystem;
+    init() {
+        this.loadPersonalizedData();
+        this.startCountdown();
+        this.setupEventListeners();
+    }
 
-        // Resetar timer quando a página for fechada/recarregada
-        window.addEventListener('beforeunload', () => {
-            timerSystem.resetTimerState();
+    loadPersonalizedData() {
+        this.showNeglectedHobbies();
+        this.showTodayAgenda();
+    }
+
+    showNeglectedHobbies() {
+        const hobbiesData = JSON.parse(localStorage.getItem('activities') || '{}');
+        const activityGoals = JSON.parse(localStorage.getItem('activityGoals') || '{}');
+        
+        if (Object.keys(hobbiesData).length === 0) {
+            this.neglectedHobbiesElement.innerHTML = '<div class="empty-message">Nenhum hobby cadastrado ainda</div>';
+            return;
+        }
+
+        const neglectedHobbies = Object.entries(hobbiesData)
+            .map(([name, progress]) => {
+                const goal = activityGoals[name] || 0;
+                const progressPercent = goal > 0 ? (progress / goal) * 100 : 0;
+                return { name, progress, goal, progressPercent };
+            })
+            .sort((a, b) => a.progressPercent - b.progressPercent)
+            .slice(0, 3);
+
+        if (neglectedHobbies.length === 0) {
+            this.neglectedHobbiesElement.innerHTML = '<div class="empty-message">Todos os hobbies em dia! 🎉</div>';
+            return;
+        }
+
+        let html = '';
+        neglectedHobbies.forEach(hobby => {
+            const icon = this.getHobbyIcon(hobby.name);
+            const progressText = hobby.goal > 0 
+                ? `${hobby.progress}/${hobby.goal} (${Math.round(hobby.progressPercent)}%)`
+                : `${hobby.progress} atividades`;
+            
+            html += `
+                <div class="hobby-item-splash">
+                    <div class="hobby-icon">${icon}</div>
+                    <div class="hobby-info">
+                        <div class="hobby-name">${hobby.name}</div>
+                        <div class="hobby-stats">${progressText}</div>
+                    </div>
+                </div>
+            `;
         });
+
+        this.neglectedHobbiesElement.innerHTML = html;
+    }
+
+    showTodayAgenda() {
+        const agendaData = JSON.parse(localStorage.getItem('agendaFlutuante') || '{}');
+        const today = new Date();
+        const dayNames = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+        const todayName = dayNames[today.getDay()];
+        
+        let todayTasks = '';
+        
+        const dayMap = {
+            'segunda': agendaData.monday || '',
+            'terça': agendaData.tuesday || '', 
+            'quarta': agendaData.wednesday || '',
+            'quinta': agendaData.thursday || '',
+            'sexta': agendaData.friday || ''
+        };
+
+        todayTasks = dayMap[todayName] || '';
+
+        if (!todayTasks.trim()) {
+            this.todayAgendaElement.innerHTML = '<div class="empty-message">Nenhum compromisso para hoje</div>';
+            return;
+        }
+
+        const tasks = todayTasks.split('\n').filter(task => task.trim());
+        
+        let html = '';
+        tasks.slice(0, 4).forEach(task => {
+            const timeMatch = task.match(/(\d{1,2}[:h]\d{2})/);
+            const time = timeMatch ? timeMatch[1] : 'Dia todo';
+            const taskText = task.replace(/(\d{1,2}[:h]\d{2})/, '').trim();
+            
+            html += `
+                <div class="agenda-item-splash">
+                    <div class="agenda-icon">⏰</div>
+                    <div class="agenda-info">
+                        <div class="agenda-task">${taskText || task}</div>
+                        <div class="agenda-time">${time}</div>
+                    </div>
+                </div>
+            `;
+        });
+
+        this.todayAgendaElement.innerHTML = html;
+    }
+
+    getHobbyIcon(hobbyName) {
+        const iconMap = {
+            'Desenho': '✏️', 'Pintura': '🎨', 'Música': '🎵', 'Leitura': '📚',
+            'Escrita': '📝', 'Programação': '💻', 'Esportes': '⚽', 'Culinária': '🍳',
+            'Yoga': '🧘', 'Meditação': '☁️', 'Violão': '🎸', 'Fotografia': '📷'
+        };
+
+        for (const [key, icon] of Object.entries(iconMap)) {
+            if (hobbyName.includes(key)) return icon;
+        }
+
+        return '🎯';
+    }
+
+    startCountdown() {
+        this.countdownInterval = setInterval(() => {
+            this.countdownTime--;
+            this.countdownElement.textContent = this.countdownTime;
+            
+            if (this.countdownTime <= 5) {
+                this.countdownElement.style.color = 'var(--warning)';
+            }
+            
+            if (this.countdownTime <= 0) {
+                this.hideSplash();
+            }
+        }, 1000);
+    }
+
+    hideSplash() {
+        clearInterval(this.countdownInterval);
+        this.splashElement.classList.add('fade-out');
+        
+        setTimeout(() => {
+            this.splashElement.style.display = 'none';
+        }, 1000);
+    }
+
+    setupEventListeners() {
+        this.skipButton.addEventListener('click', () => {
+            this.hideSplash();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.hideSplash();
+            }
+        });
+    }
+}
+
+// ===== INICIALIZAÇÃO DOS SISTEMAS =====
+const splashScreen = new SplashScreen();
+const timerSystem = new TimerSystem();
+const agendaSystem = new AgendaSystem();
+const notesSystem = new NotesSystem();
+const hobbiesSystem = new HobbiesSystem();
+
+window.timerSystem = timerSystem;
+window.notesSystem = notesSystem;
+
+window.addEventListener('beforeunload', () => {
+    timerSystem.resetTimerState();
+});
     </script>
+
+<script>
+// === DRAG & DROP NAS TAREFAS - VERSÃO CORRIGIDA ===
+document.addEventListener("DOMContentLoaded", () => {
+    const tasksList = document.getElementById('tasksList');
+    
+    let draggingTask = null;
+
+    function updateTaskOrder() {
+        const tasks = [...tasksList.querySelectorAll(".task-item")];
+        const taskNames = tasks.map(t => t.querySelector(".task-name")?.textContent.trim());
+        
+        // Atualiza a ordem no timerSystem
+        const newTasksOrder = [];
+        tasks.forEach(taskElement => {
+            const taskName = taskElement.querySelector(".task-name")?.textContent.trim();
+            const foundTask = timerSystem.state.tasks.find(task => task.name === taskName);
+            if (foundTask) {
+                newTasksOrder.push(foundTask);
+            }
+        });
+        
+        // Atualiza o array de tarefas e o índice atual
+        const oldCurrentIndex = timerSystem.state.current;
+        timerSystem.state.tasks = newTasksOrder;
+        
+        // Atualiza o índice da tarefa atual
+        if (oldCurrentIndex >= 0) {
+            const currentTaskName = timerSystem.state.tasks[oldCurrentIndex]?.name;
+            timerSystem.state.current = newTasksOrder.findIndex(task => task.name === currentTaskName);
+        }
+        
+        timerSystem.saveState();
+    }
+
+    // Configura eventos de drag & drop para cada tarefa
+    function setupDragAndDrop() {
+        const taskItems = tasksList.querySelectorAll('.task-item');
+        
+        taskItems.forEach(item => {
+            item.setAttribute("draggable", "true");
+            
+            item.addEventListener("dragstart", e => {
+                draggingTask = item;
+                item.classList.add("dragging");
+                e.dataTransfer.effectAllowed = 'move';
+            });
+
+            item.addEventListener("dragend", () => {
+                item.classList.remove("dragging");
+                draggingTask = null;
+                updateTaskOrder();
+            });
+
+            item.addEventListener("dragover", e => {
+                e.preventDefault();
+            });
+
+            item.addEventListener("dragenter", e => {
+                e.preventDefault();
+                if (item !== draggingTask) {
+                    item.classList.add("drag-over");
+                }
+            });
+
+            item.addEventListener("dragleave", () => {
+                item.classList.remove("drag-over");
+            });
+
+            item.addEventListener("drop", e => {
+                e.preventDefault();
+                item.classList.remove("drag-over");
+                
+                if (draggingTask && item !== draggingTask) {
+                    const allTasks = [...tasksList.querySelectorAll(".task-item")];
+                    const draggedIndex = allTasks.indexOf(draggingTask);
+                    const targetIndex = allTasks.indexOf(item);
+                    
+                    if (draggedIndex < targetIndex) {
+                        tasksList.insertBefore(draggingTask, item.nextSibling);
+                    } else {
+                        tasksList.insertBefore(draggingTask, item);
+                    }
+                    
+                    updateTaskOrder();
+                }
+            });
+        });
+    }
+
+    // Reconfigura o drag & drop quando as tarefas são renderizadas
+    const originalRenderTasks = timerSystem.renderTasks.bind(timerSystem);
+    timerSystem.renderTasks = function() {
+        originalRenderTasks();
+        setTimeout(setupDragAndDrop, 0);
+    };
+
+    // Configura inicial
+    setTimeout(setupDragAndDrop, 100);
+});
+</script>
+
+
 </body>
 </html>
